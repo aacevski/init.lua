@@ -40,3 +40,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 opt.iskeyword:append("-") -- consider string-string as whole word
 
+opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
+
+opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp

@@ -46,3 +46,13 @@ vim.keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 vim.keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
 vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
+
+-- Resize with arrows
+vim.keymap.set("n", "<A-Up>", ":resize -2<CR>")
+vim.keymap.set("n", "<A-Down>", ":resize +2<CR>")
+vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<A-Right>", ":vertical resize +2<CR>")
+
+-- Leader mappings
+vim.keymap.set("n", "<Leader><Leader>", "<cmd>noh<CR>")
+vim.keymap.set("n", "<Leader>r", "<cmd>lua require('aacevski.utils').reload_config()<CR>")

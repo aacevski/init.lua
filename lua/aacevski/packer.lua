@@ -26,22 +26,49 @@ if not status then
 	return
 end
 
+-- Use a popup window
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
+
 return require("packer").startup(function(use)
 	-- packer can manage itself
 	use("wbthomason/packer.nvim")
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	use("haishanh/night-owl.vim") -- preferred colorscheme
+	use({ "catppuccin/nvim", as = "catppuccin" }) -- preferred colorscheme
+
+	use("norcalli/nvim-colorizer.lua") -- color highlighting
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+
+	use("epwalsh/obsidian.nvim") -- obsidian theme
+
+	use("rcarriga/nvim-notify") -- notification manager
+	use("goolord/alpha-nvim") -- Dashboard
+	use("rgroli/other.nvim") -- Open related files in another buffer
+
+	use("SmiteshP/nvim-navic") -- winbar for code navigation
 
 	-- essentials
 	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
 	use("inkarkat/vim-ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
 
+	use({
+		"andrewferrier/debugprint.nvim",
+		config = function()
+			require("debugprint").setup()
+		end,
+	}) -- print debug statements
+
 	-- comment with gc
 	use("numToStr/Comment.nvim")
+	use("JoosepAlviste/nvim-ts-context-commentstring") -- TSX support for commenting
 
 	-- file explorer
 	use("nvim-tree/nvim-tree.lua")
@@ -61,6 +88,13 @@ return require("packer").startup(function(use)
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	}) -- markdown preview
 
 	-- treesitter configuration
 	use({
@@ -94,13 +128,16 @@ return require("packer").startup(function(use)
 	-- configuring lsp servers
 	use("neovim/nvim-lspconfig") -- easily configure language servers
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+	use({ "glepnir/lspsaga.nvim", commit = "b7b4777369b441341b2dcd45c738ea4167c11c9e" }) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+
+	-- toggle terminal
+	use("akinsho/nvim-toggleterm.lua")
 
 	use("github/copilot.vim") -- copilot
 
